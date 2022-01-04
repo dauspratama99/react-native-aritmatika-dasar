@@ -1,151 +1,159 @@
 import React, {Component} from 'react';
-import {View, Text, TextInput, TouchableOpacity} from 'react-native';
+import {FlatList, Image, ImageBackground, Text, View, TouchableOpacity, ToastAndroid, Alert} from 'react-native';
+import {style} from './asset/style';
+
+const alert = nama => {
+    Alert.alert('Perkenalkan', 'Nama Saya', + nama, [
+        {
+            text: 'Cancel',
+            onPress: () => console.log('Hallo ' + nama + 'Anda Menekan Tombol Cancel'),
+            style: 'cancel',
+        },
+        {
+            text: 'Ok',
+            onPress: () => console.log('Hallo ' + nama + 'Anda Menekan Tombol Ok'),
+        },
+    ]);
+};
+
+const notif = nama => {
+      ToastAndroid.show('Hallo ' + nama, ToastAndroid.SHORT);
+    };
 
 class App extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            panjang: 0,
-            lebar: 0,
-            hasil: 0,
-        };
+        this.state = { 
+            
+            dataArtis: [
+                {
+                    nama: "Luna Maya",
+                    pekerjaan: "Artis",
+                    asal: "Jakarta",
+                    foto: require('./asset/gambar/1.jpg'),
+                },
+
+                {
+                    nama: "Cut Tari",
+                    pekerjaan: "Artis",
+                    asal: "Jakarta",
+                    foto: require('./asset/gambar/2.png'),
+                },
+
+                {
+                    nama: "Ariel tatum",
+                    pekerjaan: "Artis",
+                    asal: "Jakarta",
+                    foto: require('./asset/gambar/3.jpg'),
+                },
+
+                {
+                    nama: "Nikita Mirzani",
+                    pekerjaan: "Artis",
+                    asal: "Jakarta",
+                    foto: require('./asset/gambar/4.jpg'),
+                },
+
+                {
+                    nama: "Nikita Willy",
+                    pekerjaan: "Artis",
+                    asal: "Jakarta",
+                    foto: require('./asset/gambar/5.jpg'),
+                },
+
+                {
+                    nama: "Aura Kasih",
+                    pekerjaan: "Artis",
+                    asal: "Jakarta",
+                    foto: require('./asset/gambar/6.jpeg'),
+                },
+
+                {
+                    nama: "Cinta Laura",
+                    pekerjaan: "Artis",
+                    asal: "Jakarta",
+                    foto: require('./asset/gambar/7.jpg'),
+                },
+
+                {
+                    nama: "Syifa Hadju",
+                    pekerjaan: "Artis",
+                    asal: "Jakarta",
+                    foto: require('./asset/gambar/8.jpg'),
+                },
+            ],
+         };
     }
-
-    hitungluas = () =>{
-        let hasilnya = 
-            parseInt(this.state.panjang) * parseInt(this.state.lebar);
-            this.setState({hasil: hasilnya});
-
-    };
-
-    hitungtinggi = () =>{
-        let hasilnya = 
-             2 * (parseInt(this.state.panjang) * parseInt(this.state.lebar));
-            this.setState({hasil: hasilnya});
-
-    };
-
-
     render() {
         return (
-            <View style={{flex: 1}}>
+            
+            <View style={style.container}>
+             
                 <View style={{
-                backgroundColor: 'yellow',
-                 flex: 1,
-                 justifyContent: 'center',
-                 alignItems: 'center',
-                  }}>
-                
-                <Text style={{
-                    color: 'black',
-                    fontSize: 20,
-                    fontWeight: 'bold',
-                }}>Hitung Luas Persegi Panjang</Text>
-                </View>
-
-                <View style={{backgroundColor: 'white', flex: 8 }}>
-                    <TextInput
-                        value={this.state.panjang}
-                        style={{
-                            backgroundColor: 'grey',
-                            marginHorizontal: 10,
-                            marginTop: 40,
-                            color: '#ffff',
-                            paddingVertical: 5,
-                            padding: 20,
-                            borderRadius: 10,
-                        }}
-                        placeholder="Masukan Nilai Panjang"
-                        placeholderTextColor="yellow"
-                        keyboardType="number-pad"
-                        onChangeText={value => this.setState({panjang: value})}
-                        />
-
-                    <TextInput
-                        value={this.state.lebar}
-                        style={{
-                            backgroundColor: 'grey',
-                            marginHorizontal: 10,
-                            marginTop: 40,
-                            color: '#ffff',
-                            paddingVertical: 5,
-                            padding: 20,
-                            borderRadius: 10,
-                        }}
-                        placeholder="Masukan Nilai Lebar"
-                        placeholderTextColor="yellow"
-                        keyboardType="number-pad"
-                        onChangeText={value => this.setState({lebar: value})}
-                        />
-
-                        <TouchableOpacity
-                            style={{
-                                backgroundColor: 'red',
-                                marginTop: 35,
-                                marginHorizontal: 50,
-                                borderRadius: 15,
-                                paddingVertical: 20,
-                            }}
-                            onPress={() => this.hitungluas()}>
-                            <Text
-                                style={{
-                                    textAlign: "center",
-                                    color: "white",
-                                    fontWeight: "bold"
-                                }}>Hitung Luas</Text>
-
-                        </TouchableOpacity>
-
-                        <TouchableOpacity
-                            style={{
-                                backgroundColor: 'purple',
-                                marginTop: 35,
-                                marginHorizontal: 50,
-                                borderRadius: 15,
-                                paddingVertical: 20,
-                            }}
-                            onPress={() => this.hitungtinggi()}>
-                            <Text
-                                style={{
-                                    textAlign: "center",
-                                    color: "white",
-                                    fontWeight: "bold"
-                                }}>Hitung Keliling</Text>
-
-                        </TouchableOpacity>
-
-                        
-                                <Text
-                                    style={{
-                                        marginTop: 45,
-                                        textAlign: "center",
-                                        fontSize: 50,
-                                    }}>
-                                        {this.state.hasil}
-                                    </Text>
-                        
-
-
                     
-                </View>
-
-                
-
-                <View style={{
-                    backgroundColor: 'grey',
-                     flex: 1,
+                     
+                     flex: 0.3,
                      justifyContent: 'center',
                      alignItems: 'flex-end',
                       }}>
-                    <Text style={{
-                        color: 'yellow',
-                        padding: 10,
-                    }}>Daus 99</Text>
+                      
+                     <Image
+                        style={{        
+                                width: 420,
+                                height: 230,
+                                alignItems: "center"}}
+                        source={require('./asset/gambar/00.jpg')}
+
+                      
+                    />
+                    
+  
                 </View>
-                
+                <Text style={{color: "dasty", fontWeight: "bold", fontSize: 25, fontFamily:"RobotoMoto"}}>              ARTIS TOP INDONESIA</Text>
+              
+                <View style={style.content}>
+                    <ImageBackground
+                        resizeMode="cover"
+                        source={require('./asset/bck.jpg')}
+                        style={style.background}>
+
+                        <FlatList
+                            data={this.state.dataArtis}
+                            keyExtractor={item => item.nama}
+                            renderItem={({item, index}) => (
+                            
+                                <TouchableOpacity style={style.kotak}
+                                // onPress={() => notif(item.nama)}>
+                                onPress={() => alert(item.nama)}>
+                                    <Image
+                                        source={item.foto}      
+                                        style={style.img}
+                                    />
+                                    <View style={{paddingHorizontal: 10}}>
+                                        <Text style={style.textNama}>{item.nama}</Text>
+                                        <Text style={style.textNama}>{item.pekerjaan}</Text>
+                                        <Text style={style.textNama}>{item.asal}</Text>
+                                    </View>
+                                </TouchableOpacity>
+                            )}
+
+                        />
+                    </ImageBackground>
+                </View>
+               
             </View>
         );
     }
 }
 
+const Photo = () => {
+    return (
+        <Image
+            style={{width: 400, height: 600}}
+            source={require('./asset/gambar/00.jpg')}
+        />
+      );
+}
+
 export default App;
+
